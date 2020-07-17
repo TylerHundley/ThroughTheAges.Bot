@@ -11,6 +11,7 @@ using Serilog;
 using Serilog.Events;
 using Microsoft.Extensions.DependencyInjection;
 using ThroughTheAges.Bot.Services;
+using Discord.Addons.Interactive;
 
 namespace ThroughTheAges.Bot
 {
@@ -56,6 +57,7 @@ namespace ThroughTheAges.Bot
         {
           services
             .AddHostedService<CommandHandler>()
+            .AddSingleton<InteractiveService>()
             .AddSingleton<Helper>();
         });
 
