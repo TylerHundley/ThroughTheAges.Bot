@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EnumsNET;
 
 namespace ThroughTheAges.Bot.WorkerService.Models
 {
@@ -26,6 +27,23 @@ namespace ThroughTheAges.Bot.WorkerService.Models
     public int MilitaryActions { get; set; }
     public string Text { get; set; }
 
+    public override string ToString()
+    {
+      return new StringBuilder()
+        .AppendLine(Name)
+        .AppendLine($"{Age.GetName()}. {Type.GetName()} - {Category.GetName()}")
+        .AppendLine($"Tech Cost: {TechCost}")
+        .AppendLine($"Resource Cost: {BuildCost}")
+        .AppendLine($"Food Production: {FoodProduction}")
+        .AppendLine($"Resource Production: {ResourceProduction}")
+        .AppendLine($"Culture Production: {CultureProduction}")
+        .AppendLine($"Strength Production: {StrengthProduction}")
+        .AppendLine($"Science Production: {ScienceProduction}")
+        .AppendLine($"Happiness: {Happiness}")
+        .AppendLine($"{CivilActions} CA, {MilitaryActions} MA")
+        .AppendLine(Text)
+        .ToString();
+    }
   }
 
   public enum CardType

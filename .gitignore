@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /src/ThroughTheAges.Bot.WorkerService/appsettings.Development.json
+/src/ThroughTheAges.Bot/appsettings.development.json

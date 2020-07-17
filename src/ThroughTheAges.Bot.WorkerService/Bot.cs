@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ThroughTheAges.Bot.WorkerService.Services;
 
 namespace ThroughTheAges.Bot.WorkerService
 {
@@ -27,7 +28,7 @@ namespace ThroughTheAges.Bot.WorkerService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-      await _services.GetRequiredService<CommandHandler>().LoadCommandsAsync();
+      await _services.GetRequiredService<CommandHandler>().InitializeAsync(default);
       await _client.LoginAsync(TokenType.Bot, _token);
       await _client.StartAsync();
     }
