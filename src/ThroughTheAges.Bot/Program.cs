@@ -12,6 +12,9 @@ using Serilog.Events;
 using Microsoft.Extensions.DependencyInjection;
 using ThroughTheAges.Bot.Services;
 using Discord.Addons.Interactive;
+using ThroughTheAges.Bot.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ThroughTheAges.Bot
 {
@@ -58,14 +61,41 @@ namespace ThroughTheAges.Bot
           services
             .AddHostedService<CommandHandler>()
             .AddSingleton<InteractiveService>()
-            .AddSingleton<Helper>();
+            .AddSingleton<CardSearchService>()
+            .AddSingleton<Helper>()
+            .AddDbContext<CardContext>(options =>
+             {
+               options.UseSqlite(context.Configuration.GetConnectionString("SqliteTestCards"));
+             }, ServiceLifetime.Transient);
         });
 
       var host = builder.Build();
       using (host)
       {
-        await host.RunAsync();
+        await host.MigrateDatabase<CardContext>().RunAsync();
       }
+    }
+  }
+
+  public static class Extensions
+  {
+    public static IHost MigrateDatabase<T>(this IHost host) where T : DbContext
+    {
+      using (var scope = host.Services.CreateScope())
+      {
+        var services = scope.ServiceProvider;
+        try
+        {
+          var db = services.GetRequiredService<T>();
+          db.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+          var logger = services.GetRequiredService<ILogger<Program>>();
+          logger.LogError(ex, "An error occurred while migrating the database.");
+        }
+      }
+      return host;
     }
   }
 }
