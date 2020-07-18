@@ -23,6 +23,7 @@ namespace ThroughTheAges.Bot.Models
     public int StrengthProduction { get; set; }
     public int ScienceProduction { get; set; }
     public int Happiness { get; set; }
+    public int Discontent { get; set; }
     public int CivilActions { get; set; }
     public int MilitaryActions { get; set; }
     public string Text { get; set; }

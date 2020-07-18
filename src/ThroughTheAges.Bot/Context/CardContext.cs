@@ -15,7 +15,8 @@ namespace ThroughTheAges.Bot.Context
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<Card>().HasData(
+      modelBuilder.Entity<Card>()
+        .HasData(
           new Card
           {
             CardId = 1,
@@ -34,6 +35,7 @@ namespace ThroughTheAges.Bot.Context
             StrengthProduction = 1,
             ScienceProduction = 0,
             Happiness = 2,
+            Discontent = 0,
             CivilActions = 0,
             MilitaryActions = 0,
             Text = ""
@@ -56,9 +58,56 @@ namespace ThroughTheAges.Bot.Context
             StrengthProduction = 0,
             ScienceProduction = 1,
             Happiness = 0,
+            Discontent = 0,
             CivilActions = 0,
             MilitaryActions = 0,
             Text = ""
+          },
+          new Card
+          {
+            CardId = 3,
+            Name = "Test Card",
+            Type = CardType.Military,
+            Category = CardCategory.Leader,
+            CountTwoPlayers = 1,
+            CountThreePlayers = 2,
+            CountFourPlayers = 3,
+            Age = Age.II,
+            TechCost = 3,
+            BuildCost = "21",
+            FoodProduction = 2,
+            ResourceProduction = 1,
+            CultureProduction = 1,
+            StrengthProduction = 4,
+            ScienceProduction = 1,
+            Happiness = 3,
+            Discontent = 1,
+            CivilActions = -1,
+            MilitaryActions = 2,
+            Text = "This is some special text"
+          },
+          new Card
+          {
+            CardId = 4,
+            Name = "Test Wonder",
+            Type = CardType.Civil,
+            Category = CardCategory.Wonder,
+            CountTwoPlayers = 1,
+            CountThreePlayers = 1,
+            CountFourPlayers = 1,
+            Age = Age.III,
+            TechCost = 3,
+            BuildCost = "4-1-1-4",
+            FoodProduction = 0,
+            ResourceProduction = 0,
+            CultureProduction = 2,
+            StrengthProduction = 0,
+            ScienceProduction = 0,
+            Happiness = 0,
+            Discontent = 1,
+            CivilActions = 0,
+            MilitaryActions = 0,
+            Text = "Does something really cool"
           }
         );
     }

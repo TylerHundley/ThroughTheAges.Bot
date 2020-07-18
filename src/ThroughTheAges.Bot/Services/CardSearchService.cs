@@ -18,10 +18,9 @@ namespace ThroughTheAges.Bot.Services
       _cardContext = cardContext;
     }
 
-    public async Task<string> GetCardDataAsync(string name)
+    public async Task<Card> GetCardDataAsync(string name)
     {
-      Card cardData = await _cardContext.Cards.AsNoTracking().Where(x => x.Name.ToUpper() == name.ToUpper()).FirstOrDefaultAsync();
-      return cardData?.ToString() ?? $"{name} not found.";
+      return await _cardContext.Cards.AsNoTracking().Where(x => x.Name.ToUpper() == name.ToUpper()).FirstOrDefaultAsync();
     }
   }
 }

@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,44 @@ namespace ThroughTheAges.Bot.Modules
   public class CardInfoModule : ModuleBase<SocketCommandContext>
   {
     private readonly CardSearchService _cardSearchService;
+    private readonly CardFormatService _cardFormatService;
 
-    public CardInfoModule(CardSearchService cardSearchService)
+    public CardInfoModule(CardSearchService cardSearchService, CardFormatService cardFormatService)
     {
       _cardSearchService = cardSearchService;
+      _cardFormatService = cardFormatService;
     }
 
     [Command("tta")]
     [Summary("Retrieves card data for any names identified by [brackets]")]
-    public async Task SendCardInfo([Remainder] string message)
+    public async Task SearchTheMessage([Remainder] string message)
+    {
+      await SendCardInfo(message);
+    }
+
+    [Command("get-tta")]
+    public async Task SearchAMessageAsync(ulong messageId)
+    {
+      var message = await Context.Channel.GetMessageAsync(messageId);
+      await SendCardInfo(message.Content);
+    }
+
+    public async Task SendCardInfo(string message)
     {
       var hits = Regex.Matches(message, @"\[(.*?)\]").Cast<Match>().Select(x => x.Groups[1].Value).Where(y => y.Any()).ToList();
 
       foreach (var name in hits)
       {
-        await ReplyAsync(await _cardSearchService.GetCardDataAsync(name));
+        var card = await _cardSearchService.GetCardDataAsync(name);
+
+        if (card == null)
+        {
+          await ReplyAsync($"{name} not found");
+        }
+        else
+        {
+          await ReplyAsync(embed: _cardFormatService.FormatCard(card));
+        }
       }
     }
 

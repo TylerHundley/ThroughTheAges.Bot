@@ -62,6 +62,7 @@ namespace ThroughTheAges.Bot
             .AddHostedService<CommandHandler>()
             .AddSingleton<InteractiveService>()
             .AddSingleton<CardSearchService>()
+            .AddTransient<CardFormatService>()
             .AddSingleton<Helper>()
             .AddDbContext<CardContext>(options =>
              {
