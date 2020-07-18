@@ -17,12 +17,12 @@ namespace ThroughTheAges.Bot.Services
         .AddField(x =>
         {
           x.Name = "Cost";
-          x.Value = $":bulb: {card.TechCost} <:rock:733843254029844490> {card.BuildCost}";
+          x.Value = $":bulb: {card.TechCost} | <:rock:733843254029844490> {card.BuildCost}{(string.IsNullOrWhiteSpace(card.BuildSteps) ? "" : $" ({card.BuildSteps})")}";
         })
         .AddField(x =>
         {
           x.Name = "Production";
-          x.Value = $":canned_food: {card.FoodProduction} <:rock:733843254029844490> {card.ResourceProduction} <:laurel_wreath:733843253773992027> {card.CultureProduction} :shield: {card.StrengthProduction} :bulb: {card.ScienceProduction}";
+          x.Value = $":canned_food: {card.FoodProduction} | <:rock:733843254029844490> {card.ResourceProduction} | <:laurel_wreath:733843253773992027> {card.CultureProduction} | :shield: {card.StrengthProduction} | :bulb: {card.ScienceProduction}";
         });
 
       var value = new StringBuilder()
@@ -30,7 +30,7 @@ namespace ThroughTheAges.Bot.Services
         .LoopAddEmoji(card.Discontent, ":neutral_face:")
         .LoopAddEmoji(card.CivilActions, ":white_circle:", true)
         .LoopAddEmoji(card.MilitaryActions, ":red_circle:", true)
-        .ToString();
+        .ToString().TrimEnd('|');
 
       if (!string.IsNullOrWhiteSpace(value))
       {
@@ -62,12 +62,17 @@ namespace ThroughTheAges.Bot.Services
       {
         if (showSign)
         {
-          sb.Append($" **{(count > 0 ? "+" : "-")}**");
+          sb.Append($" **{(count > 0 ? "+ " : "- ")}**");
+        }
+        else
+        {
+          sb.Append(" ");
         }
         for (int i = 0; i < Math.Abs(count); i++)
         {
-          sb.Append($"{emoji} ");
+          sb.Append($"{emoji}");
         }
+        sb.Append(" |");
       }
       return sb;
     }

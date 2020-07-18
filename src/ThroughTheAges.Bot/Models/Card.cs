@@ -16,7 +16,8 @@ namespace ThroughTheAges.Bot.Models
     public int CountFourPlayers { get; set; }
     public Age Age { get; set; }
     public int TechCost { get; set; }
-    public string BuildCost { get; set; }
+    public int BuildCost { get; set; }
+    public string BuildSteps { get; set; } = null;
     public int FoodProduction { get; set; }
     public int ResourceProduction { get; set; }
     public int CultureProduction { get; set; }
@@ -34,7 +35,7 @@ namespace ThroughTheAges.Bot.Models
         .AppendLine(Name)
         .AppendLine($"{Age.GetName()}. {Type.GetName()} - {Category.GetName()}")
         .AppendLine($"Tech Cost: {TechCost}")
-        .AppendLine($"Resource Cost: {BuildCost}")
+        .AppendLine($"Resource Cost: {BuildSteps}")
         .AppendLine($"Food Production: {FoodProduction}")
         .AppendLine($"Resource Production: {ResourceProduction}")
         .AppendLine($"Culture Production: {CultureProduction}")
@@ -80,6 +81,17 @@ namespace ThroughTheAges.Bot.Models
     Pact = 23,
     Tactic = 24,
     Event = 25
+  }
+
+  [AttributeUsage(AttributeTargets.Field)]
+  class ColorAttribute : Attribute
+  {
+    public Discord.Color Color { get; }
+
+    public ColorAttribute(Discord.Color color)
+    {
+      Color = color;
+    }
   }
 
   public enum Age

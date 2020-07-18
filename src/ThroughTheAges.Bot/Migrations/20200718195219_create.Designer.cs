@@ -8,8 +8,8 @@ using ThroughTheAges.Bot.Context;
 namespace ThroughTheAges.Bot.Migrations
 {
     [DbContext(typeof(CardContext))]
-    [Migration("20200718005814_discontent")]
-    partial class discontent
+    [Migration("20200718195219_create")]
+    partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace ThroughTheAges.Bot.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("BuildCost")
+                    b.Property<string>("BuildSteps")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Category")
@@ -89,7 +89,7 @@ namespace ThroughTheAges.Bot.Migrations
                         {
                             CardId = 1,
                             Age = 1,
-                            BuildCost = "3",
+                            BuildSteps = "3",
                             Category = 5,
                             CivilActions = 0,
                             CountFourPlayers = 2,
@@ -112,7 +112,7 @@ namespace ThroughTheAges.Bot.Migrations
                         {
                             CardId = 2,
                             Age = 1,
-                            BuildCost = "3",
+                            BuildSteps = "3",
                             Category = 6,
                             CivilActions = 0,
                             CountFourPlayers = 2,
@@ -135,7 +135,7 @@ namespace ThroughTheAges.Bot.Migrations
                         {
                             CardId = 3,
                             Age = 2,
-                            BuildCost = "21",
+                            BuildSteps = "21",
                             Category = 18,
                             CivilActions = -1,
                             CountFourPlayers = 3,
@@ -158,7 +158,7 @@ namespace ThroughTheAges.Bot.Migrations
                         {
                             CardId = 4,
                             Age = 3,
-                            BuildCost = "4-1-1-4",
+                            BuildSteps = "4-1-1-4",
                             Category = 17,
                             CivilActions = 0,
                             CountFourPlayers = 1,

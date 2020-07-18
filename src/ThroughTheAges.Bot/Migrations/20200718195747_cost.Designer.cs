@@ -8,8 +8,8 @@ using ThroughTheAges.Bot.Context;
 namespace ThroughTheAges.Bot.Migrations
 {
     [DbContext(typeof(CardContext))]
-    [Migration("20200717232315_initSqlite")]
-    partial class initSqlite
+    [Migration("20200718195747_cost")]
+    partial class cost
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,10 @@ namespace ThroughTheAges.Bot.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("BuildCost")
+                    b.Property<int>("BuildCost")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BuildSteps")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Category")
@@ -45,6 +48,9 @@ namespace ThroughTheAges.Bot.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CultureProduction")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Discontent")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("FoodProduction")
@@ -86,13 +92,14 @@ namespace ThroughTheAges.Bot.Migrations
                         {
                             CardId = 1,
                             Age = 1,
-                            BuildCost = "3",
+                            BuildCost = 3,
                             Category = 5,
                             CivilActions = 0,
                             CountFourPlayers = 2,
                             CountThreePlayers = 2,
                             CountTwoPlayers = 1,
                             CultureProduction = 0,
+                            Discontent = 0,
                             FoodProduction = 0,
                             Happiness = 2,
                             MilitaryActions = 0,
@@ -108,13 +115,14 @@ namespace ThroughTheAges.Bot.Migrations
                         {
                             CardId = 2,
                             Age = 1,
-                            BuildCost = "3",
+                            BuildCost = 3,
                             Category = 6,
                             CivilActions = 0,
                             CountFourPlayers = 2,
                             CountThreePlayers = 2,
                             CountTwoPlayers = 2,
                             CultureProduction = 1,
+                            Discontent = 0,
                             FoodProduction = 0,
                             Happiness = 0,
                             MilitaryActions = 0,
@@ -124,6 +132,53 @@ namespace ThroughTheAges.Bot.Migrations
                             StrengthProduction = 0,
                             TechCost = 3,
                             Text = "",
+                            Type = 1
+                        },
+                        new
+                        {
+                            CardId = 3,
+                            Age = 2,
+                            BuildCost = 21,
+                            Category = 18,
+                            CivilActions = -1,
+                            CountFourPlayers = 3,
+                            CountThreePlayers = 2,
+                            CountTwoPlayers = 1,
+                            CultureProduction = 1,
+                            Discontent = 1,
+                            FoodProduction = 2,
+                            Happiness = 3,
+                            MilitaryActions = 2,
+                            Name = "Test Card",
+                            ResourceProduction = 1,
+                            ScienceProduction = 1,
+                            StrengthProduction = 4,
+                            TechCost = 3,
+                            Text = "This is some special text",
+                            Type = 2
+                        },
+                        new
+                        {
+                            CardId = 4,
+                            Age = 3,
+                            BuildCost = 10,
+                            BuildSteps = "4-1-1-4",
+                            Category = 17,
+                            CivilActions = 0,
+                            CountFourPlayers = 1,
+                            CountThreePlayers = 1,
+                            CountTwoPlayers = 1,
+                            CultureProduction = 2,
+                            Discontent = 1,
+                            FoodProduction = 0,
+                            Happiness = 0,
+                            MilitaryActions = 0,
+                            Name = "Test Wonder",
+                            ResourceProduction = 0,
+                            ScienceProduction = 0,
+                            StrengthProduction = 0,
+                            TechCost = 3,
+                            Text = "Does something really cool",
                             Type = 1
                         });
                 });
