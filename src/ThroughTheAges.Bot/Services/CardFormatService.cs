@@ -3,6 +3,7 @@ using EnumsNET;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ThroughTheAges.Bot.Enums;
 using ThroughTheAges.Bot.Models;
 
 namespace ThroughTheAges.Bot.Services
@@ -11,9 +12,12 @@ namespace ThroughTheAges.Bot.Services
   {
     public Embed FormatCard(Card card)
     {
+      var color = card.Category.GetAttributes().Get<ColorAttribute>();
+
       var builder = new EmbedBuilder()
         .WithTitle(card.Name)
         .WithDescription($"Age {card.Age.GetName()} {card.Type.GetName()} - {card.Category.GetName()} ({card.CountTwoPlayers}/{card.CountThreePlayers}/{card.CountFourPlayers})")
+        .WithColor(color.Red, color.Green, color.Blue)
         .AddField(x =>
         {
           x.Name = "Cost";
