@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ThroughTheAges.Bot.Enums;
 using ThroughTheAges.Bot.Models;
 
 namespace ThroughTheAges.Bot.Context
