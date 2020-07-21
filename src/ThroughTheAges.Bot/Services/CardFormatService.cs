@@ -21,7 +21,7 @@ namespace ThroughTheAges.Bot.Services
         .AddField(x =>
         {
           x.Name = "Cost";
-          x.Value = $":bulb: {card.TechCost} | <:rock:733843254029844490> {card.BuildCost}{(string.IsNullOrWhiteSpace(card.BuildSteps) ? "" : $" ({card.BuildSteps})")}";
+          x.Value = $":bulb: {card.TechCost} {(card.Category == CardCategory.Government ? $"({card.RevolutionCost}) " : "")}| <:rock:733843254029844490> {card.BuildCost}{(string.IsNullOrWhiteSpace(card.BuildSteps) ? "" : $" ({card.BuildSteps})")}";
         })
         .AddField(x =>
         {
@@ -29,12 +29,21 @@ namespace ThroughTheAges.Bot.Services
           x.Value = $":canned_food: {card.FoodProduction} | <:rock:733843254029844490> {card.ResourceProduction} | <:laurel_wreath:733843253773992027> {card.CultureProduction} | :shield: {card.StrengthProduction} | :bulb: {card.ScienceProduction}";
         });
 
-      var value = new StringBuilder()
+      var sb = new StringBuilder()
         .LoopAddEmoji(card.Happiness, ":smile:")
         .LoopAddEmoji(card.Discontent, ":neutral_face:")
+        .LoopAddEmoji(card.Colonization, ":sailboat:")
         .LoopAddEmoji(card.CivilActions, ":white_circle:", true)
         .LoopAddEmoji(card.MilitaryActions, ":red_circle:", true)
-        .ToString().TrimEnd('|');
+        .LoopAddEmoji(card.BlueTokens, ":blue_circle:", true)
+        .LoopAddEmoji(card.YellowTokens, ":yellow_circle:", true);
+
+      if (card.Category == CardCategory.Government)
+      {
+        sb.LoopAddEmoji(card.BuildingLimit, ":house:");
+      }
+
+      var value = sb.ToString().TrimEnd('|');
 
       if (!string.IsNullOrWhiteSpace(value))
       {

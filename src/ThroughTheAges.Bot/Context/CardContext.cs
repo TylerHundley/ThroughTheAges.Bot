@@ -114,12 +114,12 @@ namespace ThroughTheAges.Bot.Context
     //    );
     //}
   }
-  //public class BotContextFactory : IDesignTimeDbContextFactory<CardContext>
-  //{
-  //  public CardContext CreateDbContext(string[] args)
-  //  {
-  //    var optionsBuilder = new DbContextOptionsBuilder<CardContext>().UseSqlite("Data Source = TestCards.db");
-  //    return new CardContext(optionsBuilder.Options);
-  //  }
-  //}
+  public class BotContextFactory : IDesignTimeDbContextFactory<CardContext>
+  {
+    public CardContext CreateDbContext(string[] args)
+    {
+      var optionsBuilder = new DbContextOptionsBuilder<CardContext>().UseSqlite("Data Source = TestCards.db");
+      return new CardContext(optionsBuilder.Options);
+    }
+  }
 }
