@@ -22,5 +22,10 @@ namespace ThroughTheAges.Bot.Services
     {
       return await _cardContext.Cards.AsNoTracking().Where(x => x.Name.ToUpper() == name.ToUpper()).FirstOrDefaultAsync();
     }
+
+    public async Task<List<Card>> GetAllCardsAsync()
+    {
+      return await _cardContext.Cards.AsNoTracking().ToListAsync();
+    }
   }
 }

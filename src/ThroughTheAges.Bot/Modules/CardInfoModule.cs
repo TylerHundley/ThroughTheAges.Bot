@@ -36,6 +36,16 @@ namespace ThroughTheAges.Bot.Modules
       await SendCardInfo(message.Content);
     }
 
+    [Command("all-cards")]
+    [RequireOwner]
+    public async Task GetTaskAsync()
+    {
+      foreach (var card in await _cardSearchService.GetAllCardsAsync())
+      {
+        await ReplyAsync(embed: _cardFormatService.FormatCard(card));
+      }
+    }
+
     public async Task SendCardInfo(string message)
     {
       var hits = Regex.Matches(message, @"\[(.*?)\]").Cast<Match>().Select(x => x.Groups[1].Value).Where(y => y.Any()).ToList();

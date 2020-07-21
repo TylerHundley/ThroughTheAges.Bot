@@ -29,5 +29,10 @@ namespace ThroughTheAges.Bot.Models
     public int CivilActions { get; set; }
     public int MilitaryActions { get; set; }
     public string Text { get; set; }
+    public int BuildingLimit { get; set; }
+    public int RevolutionCost { get; set; }
+    public int BlueTokens { get; set; }
+    public int YellowTokens { get; set; }
+    public int Colonization { get; set; }
   }
 }
